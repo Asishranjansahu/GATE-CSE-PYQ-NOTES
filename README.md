@@ -2,6 +2,8 @@
 
 A comprehensive collection of **GATE Computer Science Previous Year Questions (PYQ)** from 2007 to 2026, along with detailed **DBMS lecture notes**.
 
+> 🌐 **[Open Interactive Index Page](index.html)** - Search and browse all PDFs with a modern UI!
+
 ## 📁 Repository Contents
 
 ### GATE CS Previous Year Papers (2007-2026)
@@ -40,6 +42,8 @@ Detailed lecture notes covering the complete DBMS syllabus for GATE CSE preparat
 
 ### Topics Covered
 
+<a id="fundamentals"></a>
+
 #### Fundamentals
 - Data and Information
 - Database & File System
@@ -51,6 +55,8 @@ Detailed lecture notes covering the complete DBMS syllabus for GATE CSE preparat
 - Data Models
 - Data Independence
 
+<a id="table-structure--constraints"></a>
+
 #### Table Structure & Constraints
 - Essential Components of Tables
 - Views in DBMS
@@ -58,6 +64,8 @@ Detailed lecture notes covering the complete DBMS syllabus for GATE CSE preparat
 - Referential Integrity
 - Integrity Constraints
 - Super Keys
+
+<a id="er-model"></a>
 
 #### ER Model
 - ER Model Introduction
@@ -77,6 +85,8 @@ Detailed lecture notes covering the complete DBMS syllabus for GATE CSE preparat
 - Intension & Extension
 - What is RDBMS
 
+<a id="normalization"></a>
+
 #### Normalization
 - Normalization Introduction
 - Denormalization
@@ -93,6 +103,8 @@ Detailed lecture notes covering the complete DBMS syllabus for GATE CSE preparat
 - Equivalence of FDs
 - Minimal Cover
 
+<a id="transaction-management"></a>
+
 #### Transaction Management
 - Transaction & Concurrency Control
 - ACID Properties
@@ -106,6 +118,8 @@ Detailed lecture notes covering the complete DBMS syllabus for GATE CSE preparat
 - Concurrency Control Mechanisms
 - Database Recovery Management
 
+<a id="advanced-topics"></a>
+
 #### Advanced Topics
 - Query Optimization & File Organization
 - Indexing & Types
@@ -116,9 +130,44 @@ Detailed lecture notes covering the complete DBMS syllabus for GATE CSE preparat
 - Encryption
 - Data Masking Techniques
 
+<a id="sql"></a>
+
 #### SQL
 - Complete SQL Series (40 Lectures)
 - Top SQL Interview Questions
+
+---
+
+## 🚀 Quick Navigation
+
+### GATE CS PYQs (2007-2026)
+
+| Year | Papers | Year | Papers |
+|------|--------|------|--------|
+| 2007 | [CS](GATE%20CS%20PYQ/2007_CS.pdf) | 2017 | [CS1](GATE%20CS%20PYQ/2017_CS1.pdf), [CS2](GATE%20CS%20PYQ/2017_CS2.pdf) |
+| 2008 | [CS](GATE%20CS%20PYQ/2008_CS.pdf) | 2018 | [CS](GATE%20CS%20PYQ/2018_CS.pdf) |
+| 2009 | [CS](GATE%20CS%20PYQ/2009_CS.pdf) | 2019 | [CS](GATE%20CS%20PYQ/2019_CS.pdf) |
+| 2010 | [CS](GATE%20CS%20PYQ/2010_CS.pdf) | 2020 | [CS](GATE%20CS%20PYQ/2020_CS.pdf) |
+| 2011 | [CS](GATE%20CS%20PYQ/2011_CS.pdf) | 2021 | [CS](GATE%20CS%20PYQ/2021_CS.pdf) |
+| 2012 | [CS](GATE%20CS%20PYQ/2012_CS.pdf) | 2022 | [CS](GATE%20CS%20PYQ/2022_CS.pdf) |
+| 2013 | [CS](GATE%20CS%20PYQ/2013_CS.pdf) | 2023 | [CS](GATE%20CS%20PYQ/2023_CS.pdf) |
+| 2014 | [CS](GATE%20CS%20PYQ/2014_CS.pdf) | 2024 | [CS1](GATE%20CS%20PYQ/2024_CS1.pdf), [CS2](GATE%20CS%20PYQ/2024_CS2.pdf) |
+| 2015 | [CS](GATE%20CS%20PYQ/2015_CS.pdf) | 2025 | [CS1](GATE%20CS%20PYQ/2025_CS1.pdf), [CS2](GATE%20CS%20PYQ/2025_CS2.pdf) |
+| 2016 | [CS](GATE%20CS%20PYQ/2016_CS.pdf) | 2026 | [CS1](GATE%20CS%20PYQ/2026_CS1.pdf), [CS2](GATE%20CS%20PYQ/2026_CS2.pdf) |
+
+📄 [GfG PYQ Book](GATE%20CS%20PYQ/GfG%20PYQ%20Book.pdf) - Compiled PYQ book from GeeksforGeeks
+
+### DBMS Notes by Topic
+
+| Category | Topics | Link |
+|----------|--------|------|
+| 📘 Fundamentals | Data, Database, DBMS, Architecture | [Lec 1-12](#fundamentals) |
+| 📊 Tables & Constraints | Keys, Views, Integrity | [Lec 13-20](#table-structure--constraints) |
+| 🔷 ER Model | Entities, Attributes, Relationships | [Lec 21-37](#er-model) |
+| 📐 Normalization | FDs, BCNF, Decomposition | [Lec 41-58](#normalization) |
+| 🗃️ SQL | Complete SQL Series | [Lec 38](#sql) |
+| 🔄 Transactions | ACID, Serializability | [Lec 59-69](#transaction-management) |
+| 🚀 Advanced | Indexing, B-Trees, Security | [Lec 70-77](#advanced-topics) |
 
 ---
 
