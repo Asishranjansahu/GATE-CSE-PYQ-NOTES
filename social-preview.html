@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Preview Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        .preview-card {
+            width: 1280px;
+            height: 720px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .preview-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        
+        .emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        
+        .title {
+            font-size: 56px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 28px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        
+        .stat {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 42px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .stat-label {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .badge {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: white;
+            font-size: 16px;
+        }
+        
+        .instructions {
+            margin-top: 30px;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .instructions code {
+            background: #333;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="preview-card" id="preview">
+            <div class="content">
+                <div class="emoji">📚</div>
+                <div class="title">GATE CSE PYQ & Notes</div>
+                <div class="subtitle">Previous Year Questions (2007-2026) + DBMS Lecture Notes</div>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">24</div>
+                        <div class="stat-label">PYQ Papers</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">77</div>
+                        <div class="stat-label">DBMS Lectures</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">20</div>
+                        <div class="stat-label">Years</div>
+                    </div>
+                </div>
+            </div>
+            <div class="badge">⭐ MIT License</div>
+        </div>
+        
+        <div class="instructions">
+            <p>📸 <strong>To save as image:</strong> Right-click the preview above → "Save as Image" or take a screenshot</p>
+            <p>📏 <strong>Size:</strong> 1280×720px (recommended for GitHub/Twitter/LinkedIn)</p>
+            <p>📤 <strong>Upload to:</strong> GitHub repo → Settings → General → Social preview</p>
+        </div>
+    </div>
+    
+    <script>
+        // Allow clicking to download
+        document.getElementById('preview').addEventListener('click', function() {
+            alert('Right-click on the preview card and select "Save as Image" or take a screenshot (1280x720px)');
+        });
+    </script>
+</body>
+</html>
