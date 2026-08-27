@@ -2,7 +2,7 @@
 
 A comprehensive collection of **GATE Computer Science Previous Year Questions (PYQ)** from 2007 to 2026, along with detailed **DBMS lecture notes**.
 
-> 🌐 **[Open Interactive Index Page](index.html)** - Search and browse all PDFs with a modern UI!
+> 🌐 **[Open Interactive Index Page](https://asishranjansahu.github.io/GATE-CSE-PYQ-NOTES/)** - Search and browse all PDFs with a modern UI!
 
 ## 📁 Repository Contents
 
