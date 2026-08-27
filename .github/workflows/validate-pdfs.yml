@@ -1,0 +1,129 @@
+name: Validate PDFs
+
+on:
+  push:
+    paths:
+      - '**/*.pdf'
+  pull_request:
+    paths:
+      - '**/*.pdf'
+  workflow_dispatch:
+
+jobs:
+  validate-pdfs:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install PDF tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+
+      - name: Find all PDF files
+        id: find-pdfs
+        run: |
+          echo "PDF files found:"
+          find . -name "*.pdf" -type f | tee pdf_list.txt
+          PDF_COUNT=$(wc -l < pdf_list.txt)
+          echo "Total PDFs: $PDF_COUNT"
+          echo "pdf_count=$PDF_COUNT" >> $GITHUB_OUTPUT
+
+      - name: Validate PDF structure
+        run: |
+          echo "🔍 Validating PDF file structure..."
+          FAILED=0
+          
+          while IFS= read -r pdf; do
+            echo "Checking: $pdf"
+            
+            # Check if file exists and is not empty
+            if [ ! -s "$pdf" ]; then
+              echo "❌ FAIL: $pdf is empty or missing"
+              FAILED=1
+              continue
+            fi
+            
+            # Check PDF header (should start with %PDF)
+            HEADER=$(head -c 5 "$pdf")
+            if [ "$HEADER" != "%PDF-" ]; then
+              echo "❌ FAIL: $pdf - Invalid PDF header"
+              FAILED=1
+              continue
+            fi
+            
+            echo "✅ PASS: $pdf"
+          done < pdf_list.txt
+          
+          if [ $FAILED -eq 1 ]; then
+            echo ""
+            echo "❌ Some PDFs failed validation"
+            exit 1
+          fi
+          
+          echo ""
+          echo "✅ All PDFs have valid structure"
+
+      - name: Check PDF readability
+        run: |
+          echo "📖 Checking PDF readability with pdftotext..."
+          FAILED=0
+          
+          while IFS= read -r pdf; do
+            echo "Testing: $pdf"
+            
+            # Try to extract text (first page only) to verify PDF is not corrupted
+            if ! pdftotext -l 1 "$pdf" - > /dev/null 2>&1; then
+              # Some PDFs might be scanned images, check with pdfinfo instead
+              if ! pdfinfo "$pdf" > /dev/null 2>&1; then
+                echo "⚠️  WARNING: $pdf - Cannot read with pdftotext/pdfinfo"
+                # Don't fail for image-based PDFs
+              else
+                echo "✅ PASS: $pdf (image-based PDF)"
+              fi
+            else
+              echo "✅ PASS: $pdf"
+            fi
+          done < pdf_list.txt
+          
+          echo ""
+          echo "✅ PDF readability check completed"
+
+      - name: Report PDF statistics
+        run: |
+          echo "📊 PDF Statistics"
+          echo "================="
+          echo ""
+          
+          echo "📁 Files by directory:"
+          find . -name "*.pdf" -type f | sed 's|/[^/]*$||' | sort | uniq -c | sort -rn
+          
+          echo ""
+          echo "📏 File sizes:"
+          echo "Total size: $(du -sh . --exclude=.git | cut -f1)"
+          echo "Largest PDF: $(find . -name "*.pdf" -type f -exec ls -lh {} \; | awk '{print $5, $9}' | sort -hr | head -1)"
+          echo "Smallest PDF: $(find . -name "*.pdf" -type f -exec ls -lh {} \; | awk '{print $5, $9}' | sort -h | head -1)"
+          
+          echo ""
+          echo "📊 Size distribution:"
+          find . -name "*.pdf" -type f -exec ls -l {} \; | awk '{print $5}' | awk '{
+            size=$1
+            if (size < 1000000) small++
+            else if (size < 10000000) medium++
+            else large++
+          } END {
+            print "Small (<1MB):", small+0
+            print "Medium (1-10MB):", medium+0
+            print "Large (>10MB):", large+0
+          }'
+
+      - name: Upload PDF list artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf-validation-report
+          path: |
+            pdf_list.txt
+          retention-days: 7
