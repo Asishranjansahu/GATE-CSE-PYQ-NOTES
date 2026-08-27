@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GATE CSE PYQ & Notes Index</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            padding: 30px 0;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .search-box {
+            background: white;
+            border-radius: 50px;
+            padding: 15px 25px;
+            margin: 20px auto;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .search-box input {
+            width: 100%;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+        }
+        
+        .stat-box .number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .stat-box .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .tab:hover, .tab.active {
+            background: white;
+            color: #667eea;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        
+        .item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s;
+            border-left: 4px solid #667eea;
+        }
+        
+        .item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .item a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .item .icon {
+            font-size: 1.5rem;
+        }
+        
+        .item .title {
+            font-weight: 500;
+        }
+        
+        .item .subtitle {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .category {
+            margin-bottom: 30px;
+        }
+        
+        .category h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .category .items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 30px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .grid, .category .items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 GATE CSE PYQ & Notes</h1>
+            <p>Your complete resource for GATE Computer Science preparation</p>
+        </header>
+        
+        <div class="search-box">
+            <input type="text" id="search" placeholder="🔍 Search for papers or topics..." onkeyup="filterItems()">
+        </div>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <div class="number">24</div>
+                <div class="label">PYQ Papers</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">77</div>
+                <div class="label">DBMS Lectures</div>
+            </div>
+            <div class="stat-box">
+                <div class="number">20</div>
+                <div class="label">Years Covered</div>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showSection('pyq')">📄 GATE CS PYQs</button>
+            <button class="tab" onclick="showSection('dbms')">🗄️ DBMS Notes</button>
+        </div>
+        
+        <div class="content">
+            <!-- GATE CS PYQ Section -->
+            <div id="pyq" class="section active">
+                <h2>📄 GATE CS Previous Year Papers</h2>
+                <div class="grid">
+                    <div class="item" data-title="2007 CS">
+                        <a href="GATE%20CS%20PYQ/2007_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2007 CS</div>
+                                <div class="subtitle">GATE CS Paper 2007</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2008 CS">
+                        <a href="GATE%20CS%20PYQ/2008_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2008 CS</div>
+                                <div class="subtitle">GATE CS Paper 2008</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2009 CS">
+                        <a href="GATE%20CS%20PYQ/2009_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2009 CS</div>
+                                <div class="subtitle">GATE CS Paper 2009</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2010 CS">
+                        <a href="GATE%20CS%20PYQ/2010_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2010 CS</div>
+                                <div class="subtitle">GATE CS Paper 2010</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2011 CS">
+                        <a href="GATE%20CS%20PYQ/2011_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2011 CS</div>
+                                <div class="subtitle">GATE CS Paper 2011</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2012 CS">
+                        <a href="GATE%20CS%20PYQ/2012_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2012 CS</div>
+                                <div class="subtitle">GATE CS Paper 2012</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2013 CS">
+                        <a href="GATE%20CS%20PYQ/2013_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2013 CS</div>
+                                <div class="subtitle">GATE CS Paper 2013</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2014 CS">
+                        <a href="GATE%20CS%20PYQ/2014_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2014 CS</div>
+                                <div class="subtitle">GATE CS Paper 2014</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2015 CS">
+                        <a href="GATE%20CS%20PYQ/2015_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2015 CS</div>
+                                <div class="subtitle">GATE CS Paper 2015</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2016 CS">
+                        <a href="GATE%20CS%20PYQ/2016_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2016 CS</div>
+                                <div class="subtitle">GATE CS Paper 2016</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2017 CS1">
+                        <a href="GATE%20CS%20PYQ/2017_CS1.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2017 CS1</div>
+                                <div class="subtitle">GATE CS Paper 2017 (Set 1)</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2017 CS2">
+                        <a href="GATE%20CS%20PYQ/2017_CS2.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2017 CS2</div>
+                                <div class="subtitle">GATE CS Paper 2017 (Set 2)</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2018 CS">
+                        <a href="GATE%20CS%20PYQ/2018_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2018 CS</div>
+                                <div class="subtitle">GATE CS Paper 2018</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2019 CS">
+                        <a href="GATE%20CS%20PYQ/2019_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2019 CS</div>
+                                <div class="subtitle">GATE CS Paper 2019</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2020 CS">
+                        <a href="GATE%20CS%20PYQ/2020_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2020 CS</div>
+                                <div class="subtitle">GATE CS Paper 2020</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2021 CS">
+                        <a href="GATE%20CS%20PYQ/2021_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2021 CS</div>
+                                <div class="subtitle">GATE CS Paper 2021</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2022 CS">
+                        <a href="GATE%20CS%20PYQ/2022_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2022 CS</div>
+                                <div class="subtitle">GATE CS Paper 2022</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2023 CS">
+                        <a href="GATE%20CS%20PYQ/2023_CS.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2023 CS</div>
+                                <div class="subtitle">GATE CS Paper 2023</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2024 CS1">
+                        <a href="GATE%20CS%20PYQ/2024_CS1.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2024 CS1</div>
+                                <div class="subtitle">GATE CS Paper 2024 (Set 1)</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2024 CS2">
+                        <a href="GATE%20CS%20PYQ/2024_CS2.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2024 CS2</div>
+                                <div class="subtitle">GATE CS Paper 2024 (Set 2)</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2025 CS1">
+                        <a href="GATE%20CS%20PYQ/2025_CS1.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2025 CS1</div>
+                                <div class="subtitle">GATE CS Paper 2025 (Set 1)</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2025 CS2">
+                        <a href="GATE%20CS%20PYQ/2025_CS2.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2025 CS2</div>
+                                <div class="subtitle">GATE CS Paper 2025 (Set 2)</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2026 CS1">
+                        <a href="GATE%20CS%20PYQ/2026_CS1.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2026 CS1</div>
+                                <div class="subtitle">GATE CS Paper 2026 (Set 1)</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="2026 CS2">
+                        <a href="GATE%20CS%20PYQ/2026_CS2.pdf" target="_blank">
+                            <span class="icon">📝</span>
+                            <div>
+                                <div class="title">2026 CS2</div>
+                                <div class="subtitle">GATE CS Paper 2026 (Set 2)</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item" data-title="GfG PYQ Book" style="border-left-color: #28a745;">
+                        <a href="GATE%20CS%20PYQ/GfG%20PYQ%20Book.pdf" target="_blank">
+                            <span class="icon">📚</span>
+                            <div>
+                                <div class="title">GfG PYQ Book</div>
+                                <div class="subtitle">Compiled PYQ Book from GeeksforGeeks</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- DBMS Notes Section -->
+            <div id="dbms" class="section">
+                <h2>🗄️ DBMS Lecture Notes</h2>
+                
+                <!-- Fundamentals -->
+                <div class="category">
+                    <h3>📘 DBMS Fundamentals</h3>
+                    <div class="items">
+                        <div class="item" data-title="Data and Information">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-1%20Data%20and%20Information/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-1: Data and Information</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Database and File System">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-2%20Database%20%26%20file%20System/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-2: Database & File System</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="DBMS and Applications">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-3%20DBMS%20%26%20Applications/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-3: DBMS & Applications</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="One Shot Revision">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-4%20One%20shot%20revision/Lecture%204.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-4: One Shot Revision</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Types of Databases">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-5%20Types%20of%20Databases/Lecture%205.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-5: Types of Databases</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Need and Advantages of DBMS">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-6%20Need%2C%20Advantages%20%26%20Disavantages%20of%20dbms/Lec%206.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-6: Need, Advantages & Disadvantages</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Data Abstraction">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-7%20DataAbstraction%20%26%20Different%20levels/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-7: Data Abstraction & Levels</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Schema and Instance">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-8%20Schema%20%26%20Instance%20in%20DBMS/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-8: Schema & Instance</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="DBMS Architecture">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-9%20DBMS%20Architecture/dbms%20series%207.48.16%20PM.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-9: DBMS Architecture</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="3-Tier Architecture">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-10%203%20tier%20Architecture/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-10: 3-Tier Architecture</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Data Model">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-11%20Data%20model/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-11: Data Model</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Data Independence">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-12%20Data%20Independence/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-12: Data Independence</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Table Structure -->
+                <div class="category">
+                    <h3>📊 Table Structure & Constraints</h3>
+                    <div class="items">
+                        <div class="item" data-title="Essential Components">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-13%20Essential%20components%20of%20table/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-13: Essential Components</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Views">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-14%20View%20in%20DBMS/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-14: Views in DBMS</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Keys">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-15%20keys%20and%20its%20types/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-15: Keys and Types</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Referential Integrity">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-16%20Referential%20integrity/dbms%20series%20(1).pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-16: Referential Integrity</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Integrity Constraints">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-19%20Integrity%20Constraints%20in%20DBMS/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-19: Integrity Constraints</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Super Key">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-20%20Super%20key/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-20: Super Key</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ER Model -->
+                <div class="category">
+                    <h3>🔷 ER Model</h3>
+                    <div class="items">
+                        <div class="item" data-title="ER Model">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-21%20ER%20model%20in%20DBMS/dbms%20series%20(1).pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-21: ER Model in DBMS</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Entities">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-22%20Entity%20%26%20Its%20types%20_%20ER%20model/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-22: Entity & Types</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Attributes">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-23%20Attribute%20%26%20its%20types%20_%20ER%20model/dbms%20series%20(2).pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-23: Attribute & Types</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Relationships">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-24%20Relationship%2C%20Degree%20and%20Cardinality%20_%20ER%20Model/dbms%20series.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-24: Relationship, Degree & Cardinality</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="1-1 Relationship">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-25%201-1%20relationship/Relationship%20in%20er.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-25: 1-1 Relationship</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="1-N Relationship">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-26%201-N%20relationship/One%20to%20many.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-26: 1-N Relationship</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="N-1 Relationship">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-27%20N-1%20relationship/many%20to%20one.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-27: N-1 Relationship</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="N-N Relationship">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-28%20N-N%20relationship/many%20to%20many.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-28: N-N Relationship</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Participation Constraint">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-29%20Participation%20Constraint/participation%20constraint.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-29: Participation Constraint</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Extended ER Features">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-30%20Extended%20ER%20features/Extended%20Entity%20Relation.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-30: Extended ER Features</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Specialization">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-31%20Specialization/Specialization%20%26%20Generalization.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-31: Specialization</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Generalization">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-32%20Generalization/Specialization%20%26%20Generalization.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-32: Generalization</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="ER Model to Relational Model">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec%20-37%20ER%20model%20to%20Relational%20Model/dbms%20series%20(1).pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-37: ER to Relational Model</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Normalization -->
+                <div class="category">
+                    <h3>📐 Normalization</h3>
+                    <div class="items">
+                        <div class="item" data-title="Normalisation">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-41%20Normalisation/Normalisation.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-41: Normalisation</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Functional Dependency">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-43%20Functional%20Dependency/functional%20dependency.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-43: Functional Dependency</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Attribute Closure">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-44%20Attribute%20Closure/attribute%20closure.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-44: Attribute Closure</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="BCNF">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-50%20BCNF/bcnf.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-50: BCNF</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Minimal Cover">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-58%20Minimal%20cover%20in%20FD/Minimal%20cover%20of%20FD.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-58: Minimal Cover</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="How to Normalize">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-56%20Normalise%20a%20table/How%20to%20normalise%20a%20table.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-56: How to Normalize</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SQL -->
+                <div class="category">
+                    <h3>🗃️ SQL</h3>
+                    <div class="items">
+                        <div class="item" data-title="Complete SQL Series" style="border-left-color: #28a745;">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-%2038%20Complete%20SQL%20series/Complete%20SQL%20in%20one%20video.pdf" target="_blank">
+                                <span class="icon">📚</span>
+                                <div>
+                                    <div class="title">Lec-38: Complete SQL (One Video)</div>
+                                    <div class="subtitle">All SQL concepts in one place</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="SQL Interview Questions">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Top%20SQL%20Interview%20questions/Top%20SQL%20Interview%20questions.pdf" target="_blank">
+                                <span class="icon">💼</span>
+                                <div>
+                                    <div class="title">Top SQL Interview Questions</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="SQL Interview Questions Part 2">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Top%20SQL%20Interview%20questions-part2/Top%20SQL%20interview-2.pdf" target="_blank">
+                                <span class="icon">💼</span>
+                                <div>
+                                    <div class="title">Top SQL Interview Qs (Part 2)</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Transactions -->
+                <div class="category">
+                    <h3>🔄 Transaction Management</h3>
+                    <div class="items">
+                        <div class="item" data-title="Transactions">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-59%20Transaction%20and%20Concurrency%20control/transaction%20and%20concurrency.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-59: Transaction & Concurrency</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="ACID Properties">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-60%20ACID%20properties/" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-60: ACID Properties</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Isolation Levels">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-61%20Isolation%20and%20its%20level/isolation%20and%20its%20level.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-61: Isolation & Levels</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Schedules">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-62%20Schedule%20and%20its%20types/schedule%20and%20its%20types.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-62: Schedule & Types</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Serializability">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-64%20Serializability%20and%20its%20types/serializibilty.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-64: Serializability</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Conflict Serializability">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-65%20Conflict-Serializability/Conflict%20serializibility.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-65: Conflict Serializability</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Concurrency Control">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-68%20Concurrency%20control%20mechanisms/Concurrency%20control%20mechanisms.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-68: Concurrency Control</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Recovery Management">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-69%20Database%20Recovery%20management/Database%20recovery%20management.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-69: Recovery Management</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Advanced Topics -->
+                <div class="category">
+                    <h3>🚀 Advanced Topics</h3>
+                    <div class="items">
+                        <div class="item" data-title="Query Optimization">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-70%20Techniques%20for%20optimizing%20SQL%20queries%20and%20File%20organization/Query%20optimization%20and%20file%20organisation.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-70: Query Optimization</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Indexing">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-71%20Indexing%20and%20its%20types/indexing%20and%20its%20types.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-71: Indexing & Types</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="B and B+ Trees">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-72%20B%20and%20B%2B%20trees/B%20and%20B%2B%20tree.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-72: B and B+ Trees</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="RBAC">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-75%20Role%20based%20access%20control/RBAC.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-75: RBAC</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Encryption">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-76%20Encryption/Encryption.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-76: Encryption</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item" data-title="Data Masking">
+                            <a href="DBMS%20SERIES/Dbms_Series-main/Lec-77%20Data%20masking%20techniques/data%20masking%20techniques.pdf" target="_blank">
+                                <span class="icon">📄</span>
+                                <div>
+                                    <div class="title">Lec-77: Data Masking</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Made with ❤️ for GATE CSE Aspirants</p>
+            <p>Source: <a href="https://youtube.com/@RitiKumari" style="color: white;">Riti Kumari's YouTube Channel</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        function filterItems() {
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            
+            document.querySelectorAll('.item').forEach(item => {
+                const title = item.getAttribute('data-title').toLowerCase();
+                const text = item.textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || text.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Show all sections when searching
+            if (searchTerm) {
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.add('active');
+                });
+            }
+        }
+    </script>
+</body>
+</html>
